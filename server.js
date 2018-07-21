@@ -1,7 +1,12 @@
 var express = require('express');
 var request = require('request');
+var path = require('path');
 
 var app = express();
+
+// View Engine
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
 
 var jaitURL = "https://waterservices.usgs.gov/nwis/iv/?format=json&indent=on&sites=04206425&parameterCd=00060&siteStatus=all"
 
@@ -23,15 +28,15 @@ app.get("/", function(req, res) {
      var fullTime = dateTime[1].split("-")[0].split(".")[0].split(":");
      var time = fullTime[0] + ":" + fullTime[1];
 
-     var responseBody =
-       gaugeName + "<br><br>" +
-       flowRate + " cfs" + "<br><br>" +
-       time + "<br><br>" +
-       date + "<br><br>";
+     res.render('index', {
+       gaugeName: gaugeName,
+       flowRate: flowRate,
+       time: time,
+       date: date
+     });
 
-     res.status(200).send(responseBody);
    }
- })
+ });
 });
 
 // bind the app to listen for connections on a specified port
