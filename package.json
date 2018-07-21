@@ -1,7 +1,7 @@
 {
   "name": "wavegauge",
   "version": "1.0.0",
-  "description": "Express app to display river wave conditions via USGS water service data.",
+  "description": "Express.js app to display river wave conditions via USGS water service data.",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
@@ -15,9 +15,15 @@
   "author": "Raymond J. Weiss",
   "license": "MIT",
   "dependencies": {
-    "express": "^4.16.3"
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3",
+    "request": "^2.87.0"
   },
   "engines": {
     "node": "8.11.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/RayWeiss/WaveGauge.git"
   }
 }
