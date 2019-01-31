@@ -1,0 +1,21 @@
+<script type="text/javascript">
+	function initialize() {
+        var centerlatlng = new google.maps.LatLng(<%= gaugeReading.lat %>, <%= gaugeReading.lon %>);
+		var myOptions = {
+			zoom: 13,
+			center: centerlatlng,
+			mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+
+		var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+		var marker = new google.maps.Marker({
+		position: centerlatlng
+		});
+		marker.setMap(map);
+
+	}
+</script>
+
+<body style="margin:0px; padding:0px;" onload="initialize()">
+	<div id="map_canvas" style="width: 100%; height: 100%;"></div>
+</body>
