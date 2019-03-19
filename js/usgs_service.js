@@ -32,7 +32,7 @@ class UsgsService {
 
   static getJaitTimeSeries() {
     return new Promise((resolve, reject) => {
-      request(this.getTimeSeriesURL("04206425", "2018-09-19", "2018-09-19"), function (error, response, body) {
+      request(this.getTimeSeriesURL("04206425", "2019-01-01", "2019-01-04"), function (error, response, body) {
         if (!error && response.statusCode == 200) {
           resolve(new TimeSeriesReadingModel(body));
         }

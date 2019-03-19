@@ -1,0 +1,66 @@
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
+    <title>Search</title>
+</head>
+<html>
+	<canvas id="myChart" height="150"></canvas>
+</html>
+<script>
+	var timeSeriesData = <%- JSON.stringify(timeSeriesData) %>;
+	var points = timeSeriesData.points;
+	var data = points.map(function (point) {
+		return {x: point.time, y: point.flow};
+	});
+    var timeFormat = 'YYYY-MM-DD HH:mm';
+    var ctx = document.getElementById("myChart").getContext('2d');
+    var color = Chart.helpers.color;
+		var config = {
+			type: 'line',
+			data: {
+				datasets: [{
+					label: 'Dataset with point data',
+					backgroundColor: '#000000',
+					borderColor: '#f442b0',
+					fill: false,
+					data: data,
+				}]
+			},
+			options: {
+				title: {
+					text: 'Chart.js Time Scale'
+				},
+				scales: {
+					xAxes: [{
+						type: 'time',
+						time: {
+							format: timeFormat,
+							// round: 'day',
+							tooltipFormat: 'll HH:mm'
+						},
+						ticks: {
+							source: 'data',
+							autoSkip: true,
+							// callback: function(value, index, values) {
+							// 	console.log(value);
+							// 	console.log(index);
+							// 	console.log(values);
+							// 	return value;
+							// }
+						},
+						scaleLabel: {
+							display: true,
+							labelString: 'Date'
+						}
+					}],
+					yAxes: [{
+						scaleLabel: {
+							display: true,
+							labelString: 'value'
+						}
+					}]
+				},
+			}
+        };
+    var myChart = new Chart(ctx, config);
+</script>

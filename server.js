@@ -18,6 +18,14 @@ app.get("/", function(req, res) {
   });
 });
 
+app.get("/search", function(req, res) {
+  UsgsService.getJaitTimeSeries().then(function(usgsResult) {
+    res.render('search', {
+      timeSeriesData: usgsResult
+    });
+  });
+});
+
 var port = process.env.PORT || 3000;
 app.listen(port);
 console.log("Listening on port " + port);
