@@ -13,8 +13,6 @@ class TimeSeriesReadingModel {
       this.labels.push(splitLine[2].toString());
       this.rates.push(splitLine[4].toString());
       this.points.push(new FlowDataPoint(splitLine[2], splitLine[4]));
-      console.log(splitLine[2]);
-      console.log(splitLine[4]);
     });
   }
 }

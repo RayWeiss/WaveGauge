@@ -19,6 +19,16 @@ class UsgsService {
             + "&format=rdb&date_format=YYYY-MM-DD";
   }
 
+  static getTimeSeries(siteNumber, beginDate = this.todaysDateFormatted(), endDate = this.todaysDateFormatted()) {
+    return new Promise((resolve, reject) => {
+      request(this.getTimeSeriesURL(siteNumber, beginDate, endDate), function (error, response, body) {
+        if (!error && response.statusCode == 200) {
+          resolve(new TimeSeriesReadingModel(body));
+        }
+      });
+    });
+  }
+
   static getJaitReading() {
     return new Promise((resolve, reject) => {
       request(this.getInstantValueURL("04206425"), function (error, response, body) {
@@ -38,6 +48,15 @@ class UsgsService {
         }
       });
     });
+  }
+
+  static todaysDateFormatted() {
+    var today = new Date();
+    var year = String(today.getFullYear());
+    var month = String(today.getMonth() + 1).padStart(2, "0");
+    var day = String(today.getDate());
+    var formattedDate = year + "-" + month + "-" + day;
+    return formattedDate
   }
 }
 
